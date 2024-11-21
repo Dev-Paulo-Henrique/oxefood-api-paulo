@@ -16,25 +16,27 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProdutoRequest {
 
-   private String nome;
+   private String codigo;
 
-   @JsonFormat(pattern = "dd/MM/yyyy")
-   private LocalDate dataNascimento;
+   private String descricao;
 
-   private String cpf;
+   private String tempoEntregaMaximo;
 
-   private String foneCelular;
+   private String tempoEntregaMinimo;
 
-   private String foneFixo;
+   private String titulo;
+
+   private String valorUnitario;
 
    public Produto build() {
 
        return Produto.builder()
-           .nome(nome)
-           .dataNascimento(dataNascimento)
-           .cpf(cpf)
-           .foneCelular(foneCelular)
-           .foneFixo(foneFixo)
+           .codigo(codigo)
+           .descricao(descricao)
+           .tempoEntregaMaximo(tempoEntregaMaximo)
+           .tempoEntregaMinimo(tempoEntregaMinimo)
+           .titulo(titulo)
+           .valorUnitario(valorUnitario)
            .build();
    }
 

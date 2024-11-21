@@ -23,18 +23,21 @@ import lombok.Setter;
 public class Produto extends EntidadeAuditavel  {
   
    @Column
-   private String nome;
+   private String codigo;
 
    @Column
-   private LocalDate dataNascimento;
+   private String descricao;
 
    @Column
-   private String cpf;
+   private String tempoEntregaMaximo;
 
    @Column
-   private String foneCelular;
+   private String tempoEntregaMinimo;
 
    @Column
-   private String foneFixo;
+   private String titulo;
+
+   @Column
+   private String valorUnitario;
 
 }
