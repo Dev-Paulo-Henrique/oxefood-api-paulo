@@ -1,6 +1,5 @@
 package br.com.ifpe.oxefood.modelo.produto;
 
-import java.time.LocalDate;
 import org.hibernate.annotations.SQLRestriction;
 import br.com.ifpe.oxefood.util.entity.EntidadeAuditavel;
 import jakarta.persistence.Column;
