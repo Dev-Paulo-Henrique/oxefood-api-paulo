@@ -5,6 +5,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.ifpe.oxefood.modelo.cliente.Cliente;
 
 import java.util.List;
 
@@ -50,6 +51,15 @@ public class EntregadorService {
         entregador.setEnderecoEstado(entregadorAlterado.getEnderecoEstado());
         entregador.setEnderecoComplemento(entregadorAlterado.getEnderecoComplemento());
         entregador.setAtivo(entregadorAlterado.getAtivo());
+
+        repository.save(entregador);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+
+        Entregador entregador = repository.findById(id).get();
+        entregador.setHabilitado(Boolean.FALSE);
 
         repository.save(entregador);
     }
