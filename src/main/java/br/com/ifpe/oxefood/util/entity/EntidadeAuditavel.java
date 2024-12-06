@@ -41,3 +41,4 @@ public abstract class EntidadeAuditavel extends EntidadeNegocio {
    private Long ultimaModificacaoPor; // Id do usuário que fez a última alteração
 
 }
+ 

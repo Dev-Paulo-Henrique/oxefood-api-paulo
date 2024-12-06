@@ -3,9 +3,12 @@ package br.com.ifpe.oxefood.modelo.cliente;
 import jakarta.transaction.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Service
 public class ClienteService {
@@ -27,7 +30,22 @@ public class ClienteService {
 
     public Cliente obterPorID(Long id) {
 
-        return repository.findById(id).get();
+        Optional<Cliente> consulta = repository.findById(id);
+
+        if (consulta.isPresent()) {
+            return consulta.get();
+        } else {
+            throw new EntidadeNaoEncontradaException("Cliente", id);
+        }
+
+    }
+
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    public class EntidadeNaoEncontradaException extends RuntimeException {
+
+        public EntidadeNaoEncontradaException(String entidade, Long id) {
+            super(String.format("Não foi encontrado(a) um(a) %s com o id %s", entidade, id.toString()));
+        }
     }
 
     @Transactional
