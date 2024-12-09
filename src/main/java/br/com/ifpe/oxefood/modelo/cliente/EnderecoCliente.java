@@ -37,6 +37,7 @@ public class EnderecoCliente extends EntidadeAuditavel {
  
     @Column
     private String bairro;
+    
     @Column
     private String cep;
  
