@@ -17,6 +17,9 @@ public class ClienteService {
     @Autowired
     private ClienteRepository repository;
 
+    @Autowired
+    private EnderecoClienteRepository enderecoClienteRepository;
+
     @Transactional
     public Cliente save(Cliente cliente) {
 
@@ -96,6 +99,34 @@ public class ClienteService {
       
        return endereco;
    }
+
+   @Transactional
+   public EnderecoCliente atualizarEnderecoCliente(Long id, EnderecoCliente enderecoAlterado) {
+
+       EnderecoCliente endereco = enderecoClienteRepository.findById(id).get();
+       endereco.setRua(enderecoAlterado.getRua());
+       endereco.setNumero(enderecoAlterado.getNumero());
+       endereco.setBairro(enderecoAlterado.getBairro());
+       endereco.setCep(enderecoAlterado.getCep());
+       endereco.setCidade(enderecoAlterado.getCidade());
+       endereco.setEstado(enderecoAlterado.getEstado());
+       endereco.setComplemento(enderecoAlterado.getComplemento());
+
+       return enderecoClienteRepository.save(endereco);
+   }
+
+   @Transactional
+   public void removerEnderecoCliente(Long idEndereco) {
+
+       EnderecoCliente endereco = enderecoClienteRepository.findById(idEndereco).get();
+       endereco.setHabilitado(Boolean.FALSE);
+       enderecoClienteRepository.save(endereco);
+
+       Cliente cliente = this.obterPorID(endereco.getCliente().getId());
+       cliente.getEnderecos().remove(endereco);
+       repository.save(cliente);
+   }
+
 
 
 }
