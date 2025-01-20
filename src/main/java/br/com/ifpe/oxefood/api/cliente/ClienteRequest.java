@@ -66,6 +66,7 @@ public class ClienteRequest {
         return Cliente.builder()
                 .usuario(buildUsuario())
                 .nome(nome)
+                .email(email)
                 .dataNascimento(dataNascimento)
                 .cpf(cpf)
                 .foneCelular(foneCelular)

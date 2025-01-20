@@ -69,4 +69,8 @@ public class Entregador extends EntidadeAuditavel  {
 
    @Column
    private Boolean ativo;
+   
+   @Column
+   private String email;
+
 }

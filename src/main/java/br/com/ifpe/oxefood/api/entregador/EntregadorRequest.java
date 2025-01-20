@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.ifpe.oxefood.modelo.entregador.Entregador;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +17,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EntregadorRequest {
+
+    @NotBlank(message = "O Email é de preenchimento obrigatório")
+    @Email
+    private String email;
    
    private String nome;
    private String cpf;
@@ -51,6 +57,7 @@ public class EntregadorRequest {
            .ativo(ativo)
            .dataNascimento(dataNascimento)
            .cpf(cpf)
+           .email(email)
            .foneCelular(foneCelular)
            .foneFixo(foneFixo)
            .build();

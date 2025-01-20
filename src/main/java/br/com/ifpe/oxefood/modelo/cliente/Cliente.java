@@ -47,6 +47,9 @@ public class Cliente extends EntidadeAuditavel  {
    @Column
    private LocalDate dataNascimento;
 
+   @Column
+   private String email;
+
    @Column (unique = true)
    private String cpf;
 
