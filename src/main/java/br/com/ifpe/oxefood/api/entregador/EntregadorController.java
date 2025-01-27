@@ -16,16 +16,27 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.ifpe.oxefood.modelo.entregador.Entregador;
 import br.com.ifpe.oxefood.modelo.entregador.EntregadorService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/entregador")
 @CrossOrigin
+
+@Tag(
+    name = "API Entregador",
+    description = "API responsável pelos serviços de entregador no sistema"
+)
 public class EntregadorController {
 
     @Autowired
     private EntregadorService entregadorService;
 
+    @Operation(
+        summary = "Serviço responsável por salvar um entregador no sistema."
+    ) 
     @PostMapping
     public ResponseEntity<Entregador> save(@RequestBody EntregadorRequest request) {
 
@@ -33,16 +44,25 @@ public class EntregadorController {
         return new ResponseEntity<Entregador>(entregador, HttpStatus.CREATED);
     }
 
+    @Operation(
+        summary = "Serviço responsável por listar todos os entregadores no sistema."
+    ) 
     @GetMapping
     public List<Entregador> listarTodos() {
         return entregadorService.listarTodos();
     }
 
+    @Operation(
+        summary = "Serviço responsável por listar um entregador de ID específico no sistema."
+    ) 
     @GetMapping("/{id}")
     public Entregador obterPorID(@PathVariable Long id) {
         return entregadorService.obterPorID(id);
     }
 
+    @Operation(
+        summary = "Serviço responsável por editar um entregador de ID específico no sistema."
+    ) 
     @PutMapping("/{id}")
     public ResponseEntity<Entregador> update(@PathVariable("id") Long id, @RequestBody EntregadorRequest request) {
 
@@ -50,6 +70,9 @@ public class EntregadorController {
         return ResponseEntity.ok().build();
     }
 
+    @Operation(
+        summary = "Serviço responsável por deletar um entregador de ID específico no sistema."
+    ) 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
 

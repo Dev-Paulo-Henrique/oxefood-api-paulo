@@ -13,9 +13,18 @@ import br.com.ifpe.oxefood.modelo.acesso.Usuario;
 import br.com.ifpe.oxefood.modelo.acesso.UsuarioService;
 import br.com.ifpe.oxefood.modelo.seguranca.JwtService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/auth")
 @CrossOrigin
+
+@Tag(
+    name = "API Autenticação",
+    description = "API responsável pelos serviços de autenticação no sistema"
+)
+
 public class AuthenticationController {
 
     private final JwtService jwtService;
@@ -28,6 +37,9 @@ public class AuthenticationController {
         this.usuarioService = usuarioService;
     }
 
+    @Operation(
+        summary = "Serviço responsável por autenticar um cliente no sistema."
+    ) 
     @PostMapping
     public Map<Object, Object> signin(@RequestBody AuthenticationRequest data) {
     

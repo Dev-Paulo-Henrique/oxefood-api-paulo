@@ -16,23 +16,40 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.ifpe.oxefood.modelo.venda.Venda;
 import br.com.ifpe.oxefood.modelo.venda.VendaService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/venda")
 @CrossOrigin
+
+@Tag(
+    name = "API Venda",
+    description = "API responsável pelos serviços de venda no sistema"
+)
 public class VendaController {
 
+    @Operation(
+        summary = "Serviço responsável por listar todas as vendas no sistema."
+    ) 
     @GetMapping
     public List<Venda> listarTodos() {
         return vendaService.listarTodos();
     }
 
+    @Operation(
+        summary = "Serviço responsável por listar uma venda de ID específico no sistema."
+    ) 
     @GetMapping("/{id}")
     public Venda obterPorID(@PathVariable Long id) {
         return vendaService.obterPorID(id);
     }
 
+    @Operation(
+        summary = "Serviço responsável por editar uma venda de ID específico no sistema."
+    ) 
     @PutMapping("/{id}")
     public ResponseEntity<Venda> update(@PathVariable("id") Long id, @RequestBody VendaRequest request) {
 
@@ -43,6 +60,9 @@ public class VendaController {
     @Autowired
     private VendaService vendaService;
 
+    @Operation(
+        summary = "Serviço responsável por salvar uma venda no sistema."
+    ) 
     @PostMapping
     public ResponseEntity<Venda> save(@RequestBody VendaRequest request) {
 
@@ -50,6 +70,9 @@ public class VendaController {
         return new ResponseEntity<Venda>(venda, HttpStatus.CREATED);
     }
 
+    @Operation(
+        summary = "Serviço responsável por deletar uma venda de ID específico no sistema."
+    ) 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
 

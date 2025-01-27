@@ -16,26 +16,43 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.ifpe.oxefood.modelo.categoriaproduto.CategoriaProduto;
 import br.com.ifpe.oxefood.modelo.categoriaproduto.CategoriaProdutoService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/categoriaproduto")
 @CrossOrigin
+
+@Tag(
+    name = "API Categoria",
+    description = "API responsável pelos serviços de Categoria no sistema"
+)
 public class CategoriaProdutoController {
 
     @Autowired
     private CategoriaProdutoService categoriaProdutoService;
 
+    @Operation(
+        summary = "Serviço responsável por listar todas as categorias no sistema."
+    ) 
     @GetMapping
     public List<CategoriaProduto> listarTodos() {
         return categoriaProdutoService.listarTodos();
     }
 
+    @Operation(
+        summary = "Serviço responsável por listar uma categoria de ID específico no sistema."
+    ) 
     @GetMapping("/{id}")
     public CategoriaProduto obterPorID(@PathVariable Long id) {
         return categoriaProdutoService.obterPorID(id);
     }
 
+    @Operation(
+        summary = "Serviço responsável por editar uma categoria de ID específico no sistema."
+    ) 
     @PutMapping("/{id}")
     public ResponseEntity<CategoriaProduto> update(@PathVariable("id") Long id, @RequestBody CategoriaProdutoRequest request) {
 
@@ -43,6 +60,9 @@ public class CategoriaProdutoController {
         return ResponseEntity.ok().build();
     }
 
+    @Operation(
+        summary = "Serviço responsável por salvar uma categoria no sistema."
+    ) 
     @PostMapping
     public ResponseEntity<CategoriaProduto> save(@RequestBody CategoriaProdutoRequest request) {
 
@@ -51,6 +71,9 @@ public class CategoriaProdutoController {
         return new ResponseEntity<CategoriaProduto>(categoriaProduto, HttpStatus.CREATED);
     }
 
+    @Operation(
+        summary = "Serviço responsável por deletar uma categoria de ID específico no sistema."
+    ) 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
 
